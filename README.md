@@ -35,3 +35,50 @@ ufw --force enable         # turn the firewall on; --force skips the "this may d
 
 ufw status    # should list OpenSSH and Nginx Full as ALLOW
 ```
+## Add Domain Name (jrenjq.com) to Droplet
+### 1. Point the domain at the droplet (Namecheap)
+
+1. Log in to Namecheap, go to **Domain List**, and click **Manage** next to your domain.
+2. Open the **Nameservers** setting and make sure it's **Namecheap BasicDNS** (the default). If you've changed it to something else, the records below won't take effect.
+3. Go to the **Advanced DNS** tab and add these records (delete any default parking-page records first, like the `URL Redirect` or the `CNAME` for `www` pointing to `parkingpage.namecheap.com`):
+
+| Type | Host | Value | TTL |
+|---|---|---|---|
+| A Record | `@` | `YOUR_DROPLET_IP` | Automatic |
+| A Record | `www` | `YOUR_DROPLET_IP` | Automatic |
+
+`@` means the bare domain (`example.com`), and `www` covers `www.example.com`.
+
+### 2. Update nginx to use the domain
+
+On the droplet, edit the `server_name` line. Replace `example.com` with your real domain:
+
+```bash
+sed -i 's/server_name _;/server_name example.com www.example.com;/' /etc/nginx/sites-available/myapp
+nginx -t && systemctl reload nginx
+```
+
+Also change `listen 80 default_server;` to `listen 80;` if you want nginx to only answer for your domain (optional; leaving it means requests by raw IP still work too, which is handy for testing).
+
+Now `http://example.com` should show your Hello world page and `http://example.com/api/test` should return the ping.
+
+### 3. Add HTTPS (free, with Let's Encrypt)
+
+Wait until the domain resolves to your droplet, then:
+
+```bash
+apt install -y certbot python3-certbot-nginx
+certbot --nginx -d example.com -d www.example.com
+```
+
+Certbot will:
+- ask for your email,
+- ask you to accept the terms,
+- obtain the certificate and edit your nginx config to use it,
+- offer to redirect HTTP to HTTPS (choose yes).
+
+Certificates renew automatically. You can test that with:
+
+```bash
+certbot renew --dry-run
+```
