@@ -14,7 +14,7 @@ else
 fi
 
 # 2. sync with prod repo
-rsync -a --delete --exclude='venv' --exclude='__pycache__' --exclude='push2prodrepo.sh' . "$PROD_DIR"
+rsync -a --delete --exclude='venv' --exclude='__pycache__' --exclude='pushsync.sh' . "$PROD_DIR"
 
 # 3. commit and push to PROD repo, but only if something actually changed
 cd "$PROD_DIR"
