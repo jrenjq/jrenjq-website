@@ -1,6 +1,6 @@
 # jrenjq-website
 
-## DigitalOcean Ubuntu Droplet First-time Setup
+## A. DigitalOcean Ubuntu Droplet First-time Setup
 > Ubuntu 24.04 (LTS) x64
 
 > Basic / 1 vCPU / 1 GB RAM / 25 GB Disk
@@ -35,7 +35,116 @@ ufw --force enable         # turn the firewall on; --force skips the "this may d
 
 ufw status    # should list OpenSSH and Nginx Full as ALLOW
 ```
-## Add Domain Name (jrenjq.com) to Droplet
+## B. Add Backend (Flask)
+### 1. Install venv, flask, gunicorn
+```
+mkdir -p /opt/myapp/backend && cd /opt/myapp/backend
+python3 -m venv venv
+./venv/bin/pip install flask gunicorn
+```
+### 2. Create `app.py`:
+```
+cat > app.py << 'EOF'
+from flask import Flask, jsonify
+
+app = Flask(__name__)
+
+@app.route("/api/ping")
+def ping():
+    return jsonify(message="pong")
+EOF
+chown -R www-data:www-data /opt/myapp
+```
+### 3. Create the systemd service so it runs on boot and restarts if it crashes:
+```
+cat > /etc/systemd/system/myapp.service << 'EOF'
+[Unit]
+Description=Flask app (gunicorn)
+After=network.target
+
+[Service]
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/myapp/backend
+ExecStart=/opt/myapp/backend/venv/bin/gunicorn --workers 1 --bind 127.0.0.1:8000 app:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl daemon-reload
+systemctl enable --now myapp
+curl http://127.0.0.1:8000/api/ping    # should print {"message":"pong"}
+```
+## C. Add Frontend (React)
+### 1. (ON OWN COMPUTER) Scaffold React frontend with NPM
+```
+npm create vite@latest frontend -- --template react
+cd frontend
+npm install
+```
+### 2. Replace `src/App.jsx` with:
+```jsx
+import { useEffect, useState } from "react";
+
+export default function App() {
+  const [msg, setMsg] = useState("loading...");
+
+  useEffect(() => {
+    fetch("/api/test")
+      .then((r) => r.json())
+      .then((d) => setMsg(d.message))
+      .catch(() => setMsg("error"));
+  }, []);
+
+  return (
+    <div>
+      <h1>Hello world</h1>
+      <p>Backend says: {msg}</p>
+    </div>
+  );
+}
+```
+### 3. Build and upload to DigitalOcean droplet:
+```
+npm run build
+scp -r dist/* root@YOUR_DROPLET_IP:/var/www/myapp/frontend
+```
+## D. NGINX Configuration
+### 1. Create configuration file
+> ensure `root` is where the frontend build files are (`var/www/myapp/frontend`)
+```
+mkdir -p /var/www/myapp
+
+cat > /etc/nginx/sites-available/myapp << 'EOF'
+server {
+    listen 80 default_server;
+    server_name _;
+
+    root /opt/myapp/frontend;
+    index index.html;
+
+    location / {
+        try_files $uri /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+EOF
+```
+### 2. Create symbolic link to actual config file location, and remove default NGINX page
+```
+ln -sf /etc/nginx/sites-available/myapp /etc/nginx/sites-enabled/myapp
+rm -f /etc/nginx/sites-enabled/default
+nginx -t && systemctl reload nginx
+```
+
+## E. Add Domain Name (jrenjq.com) to Droplet
 ### 1. Point the domain at the droplet (Namecheap)
 
 1. Log in to Namecheap, go to **Domain List**, and click **Manage** next to your domain.
@@ -51,16 +160,14 @@ ufw status    # should list OpenSSH and Nginx Full as ALLOW
 
 ### 2. Update nginx to use the domain
 
-On the droplet, edit the `server_name` line. Replace `example.com` with your real domain:
+On the droplet, edit the `server_name` line.
 
 ```bash
-sed -i 's/server_name _;/server_name example.com www.example.com;/' /etc/nginx/sites-available/myapp
+sed -i 's/server_name _;/server_name jrenjq.com www.jrenjq.com;/' /etc/nginx/sites-available/myapp
 nginx -t && systemctl reload nginx
 ```
 
 Also change `listen 80 default_server;` to `listen 80;` if you want nginx to only answer for your domain (optional; leaving it means requests by raw IP still work too, which is handy for testing).
-
-Now `http://example.com` should show your Hello world page and `http://example.com/api/test` should return the ping.
 
 ### 3. Add HTTPS (free, with Let's Encrypt)
 
@@ -81,4 +188,44 @@ Certificates renew automatically. You can test that with:
 
 ```bash
 certbot renew --dry-run
+```
+
+Certbot will update the NGINX configuration in `/etc/nginx/sites-available/myapp` to:
+```
+server {
+    server_name jrenjq.com www.jrenjq.com; # managed by Certbot
+
+    root /opt/myapp/frontend;
+    index index.html;
+
+    location / {
+        try_files $uri /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/jrenjq.com/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/jrenjq.com/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+}
+
+server {
+    if ($host = www.jrenjq.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    if ($host = jrenjq.com) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+    listen 80;
+    server_name jrenjq.com www.jrenjq.com;
+    return 404; # managed by Certbot
+}
 ```
