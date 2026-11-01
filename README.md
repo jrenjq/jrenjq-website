@@ -234,33 +234,33 @@ server {
 
 This repo is used to transfer Flask backend and React build files from development environment to production on digitalocean droplet.
 
-## 1. Prerequisites
+### 1. Prerequisites
 
-### In the development environment (laptop):
+#### i. In the development environment (laptop):
 You must have the development repo [jrenjq-website](https://github.com/jrenjq-dev/jrenjq-website) and [this repo](https://github.com/jrenjq-dev/jrenjq-website-PROD) side-by-side, named exactly:
 ```
 |--- jrenjq-website
 |--- jrenjq-website-PROD
 ```
 
-### In the production environment (digitalocean droplet):
+#### ii. In the production environment (digitalocean droplet):
 In the directory where the project files are kept, where NGINX points to `frontend` (e.g. `opt/myapp`, because NGINX point to frontend `opt/myapp/frontend`:
 1. set up git (including SSH key)
 2. point git upstream to this repo
 
-## 2. Instructions:
+### 2. Instructions:
 
-### Frontend
+#### i. Frontend
 1. Go to the development repo `jrenjq-website/frontend` and run the script `pushsync.sh`
     - This runs `npm build`, copies over everything from `jrenjq-website/dist` (development repo) into `jrenjq-website-PROD/frontend` (production repo)
     - This pushes everything that's copied over into git
 2. log into digitalocean and run `git pull` in the project files where this git repo is upstreamed (`/opt/myapp/frontend`)
 
-### Backend
+#### ii. Backend
 1. Go to the development repo `jrenjq-website/backend` and run the script `pushsync.sh`
 2. log into digitalocean and run `git pull` in the project files where this git repo is upstreamed (`opt/myapp/backend`)
 
-## 3. Shell script (Frontend) to build and push build files only
+### 3. Shell script (Frontend) to build and push build files only
 ```sh
 #!/bin/bash
 set -e    # stop immediately if any step fails
@@ -295,7 +295,7 @@ else
   git push
 fi
 ```
-## Shell script (Backend) to sync and push both DEV and PROD code
+### 4. Shell script (Backend) to sync and push both DEV and PROD code
 ```sh
 #!/bin/bash
 set -e    # stop immediately if any step fails
