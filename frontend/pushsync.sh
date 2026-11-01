@@ -25,7 +25,7 @@ cp -r dist/. "$PROD_DIR/"    # copy the new build in
 cd "$PROD_DIR"
 git add -A
 if git diff --cached --quiet; then
-  echo "No changes to deploy."
+  echo "No changes to push to PROD."
 else
   git commit -m "Pushed PROD frontend build files $(date '+%Y-%m-%d %H:%M:%S')"
   git push
