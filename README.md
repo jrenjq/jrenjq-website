@@ -229,3 +229,99 @@ server {
     return 404; # managed by Certbot
 }
 ```
+## F. Add Simple CI/CD Shell Script
+> See: https://github.com/jrenjq-dev/jrenjq-website-PROD
+
+This repo is used to transfer Flask backend and React build files from development environment to production on digitalocean droplet.
+
+## 1. Prerequisites
+
+### In the development environment (laptop):
+You must have the development repo [jrenjq-website](https://github.com/jrenjq-dev/jrenjq-website) and [this repo](https://github.com/jrenjq-dev/jrenjq-website-PROD) side-by-side, named exactly:
+```
+|--- jrenjq-website
+|--- jrenjq-website-PROD
+```
+
+### In the production environment (digitalocean droplet):
+In the directory where the project files are kept, where NGINX points to `frontend` (e.g. `opt/myapp`, because NGINX point to frontend `opt/myapp/frontend`:
+1. set up git (including SSH key)
+2. point git upstream to this repo
+
+## 2. Instructions:
+
+### Frontend
+1. Go to the development repo `jrenjq-website/frontend` and run the script `pushsync.sh`
+    - This runs `npm build`, copies over everything from `jrenjq-website/dist` (development repo) into `jrenjq-website-PROD/frontend` (production repo)
+    - This pushes everything that's copied over into git
+2. log into digitalocean and run `git pull` in the project files where this git repo is upstreamed (`/opt/myapp/frontend`)
+
+### Backend
+1. Go to the development repo `jrenjq-website/backend` and run the script `pushsync.sh`
+2. log into digitalocean and run `git pull` in the project files where this git repo is upstreamed (`opt/myapp/backend`)
+
+## 3. Shell script (Frontend) to build and push build files only
+```sh
+#!/bin/bash
+set -e    # stop immediately if any step fails
+
+SRC_DIR="$(cd "$(dirname "$0")" && pwd)"    # folder this script lives in (the source repo)
+PROD_DIR="$SRC_DIR/../../jrenjq-website-PROD/frontend"    # destination of build files 
+
+# 1. commit and push source files to DEV repo, but only if something actually chanced
+git add -A
+if git diff --cached --quiet; then
+  echo "No changes to push to DEV."
+else
+  git commit -m "Pushed DEV frontend source files $(date '+%Y-%m-%d %H:%M:%S')"
+  git push
+fi
+
+# 2. build
+cd "$SRC_DIR"
+npm run build
+
+# 3. copy ONLY BUILD files into the prod repo
+rm -rf "$PROD_DIR/assets"    # remove old hashed JS/CSS
+cp -r dist/. "$PROD_DIR/"    # copy the new build in
+
+# 4. commit and push build files to PROD repo, but only if something actually changed
+cd "$PROD_DIR"
+git add -A
+if git diff --cached --quiet; then
+  echo "No changes to push to PROD."
+else
+  git commit -m "Pushed PROD frontend build files $(date '+%Y-%m-%d %H:%M:%S')"
+  git push
+fi
+```
+## Shell script (Backend) to sync and push both DEV and PROD code
+```sh
+#!/bin/bash
+set -e    # stop immediately if any step fails
+
+SRC_DIR="$(cd "$(dirname "$0")" && pwd)"    # folder this script lives in (the source repo)
+PROD_DIR="$SRC_DIR/../../jrenjq-website-PROD/backend"    # destination of sync files 
+
+# 1. commit and push to DEV repo, but only if something actually chanced
+git add -A
+if git diff --cached --quiet; then
+  echo "No changes to push to DEV."
+else
+  git commit -m "Pushed DEV backend files $(date '+%Y-%m-%d %H:%M:%S')"
+  git push
+fi
+
+# 2. sync with prod repo
+rsync -a --delete --exclude='venv' --exclude='__pycache__' --exclude='pushsync.sh' . "$PROD_DIR"
+
+# 3. commit and push to PROD repo, but only if something actually changed
+cd "$PROD_DIR"
+git add -A
+if git diff --cached --quiet; then
+  echo "No changes to push to PROD."
+else
+  git commit -m "Pushed PROD backend files $(date '+%Y-%m-%d %H:%M:%S')"
+  git push
+fi
+```
