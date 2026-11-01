@@ -8,7 +8,6 @@ PROD_DIR="$SRC_DIR/../../jrenjq-website-PROD/backend"    # destination of sync f
 git add -A
 if git diff --cached --quiet; then
   echo "No changes to deploy to DEV."
-  exit 0    # stop the script here with a success status, since no changes.
 else
   git commit -m "Deploy DEV backend files $(date '+%Y-%m-%d %H:%M:%S')"
   git push
