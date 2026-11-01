@@ -7,9 +7,9 @@ PROD_DIR="$SRC_DIR/../../jrenjq-website-PROD/backend"    # destination of sync f
 # 1. commit and push to DEV repo, but only if something actually chanced
 git add -A
 if git diff --cached --quiet; then
-  echo "No changes to deploy to DEV."
+  echo "No changes to push to DEV."
 else
-  git commit -m "Deploy DEV backend files $(date '+%Y-%m-%d %H:%M:%S')"
+  git commit -m "Pushed DEV backend files $(date '+%Y-%m-%d %H:%M:%S')"
   git push
 fi
 
@@ -20,8 +20,8 @@ rsync -a --delete --exclude='venv' --exclude='__pycache__' --exclude='push2prodr
 cd "$PROD_DIR"
 git add -A
 if git diff --cached --quiet; then
-  echo "No changes to deploy to PROD."
+  echo "No changes to push to PROD."
 else
-  git commit -m "Deploy PROD backend files $(date '+%Y-%m-%d %H:%M:%S')"
+  git commit -m "Pushed PROD backend files $(date '+%Y-%m-%d %H:%M:%S')"
   git push
 fi
