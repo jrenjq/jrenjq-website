@@ -1,18 +1,68 @@
-.counter {
+.tags {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 24px;
+}
+
+.tags button {
+  margin-bottom: 0;
+}
+
+.flag {
+  height: 38px;
+  width: auto;
+  border-radius: 4px;
+}
+
+.subscript {
+  margin-left: 6px;
+}
+
+.subscript .flag {
+  height: 32px;
+  width: auto;
+  vertical-align: baseline;
+  border-radius: 3px;
+}
+
+.purple-bg-button {
   font-size: 16px;
   padding: 5px 10px;
   border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
+  color: var(--purple);
+  background: var(--purple-bg);
   border: 2px solid transparent;
   transition: border-color 0.3s;
   margin-bottom: 24px;
+  margin-right: 6px;
 
   &:hover {
-    border-color: var(--accent-border);
+    border-color: var(--purple-border);
   }
   &:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--purple);
+    outline-offset: 2px;
+  }
+}
+
+.blue-bg-button {
+  font-size: 16px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--blue);
+  background: var(--blue-bg);
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+  margin-bottom: 24px;
+  margin-right: 6px;
+
+  &:hover {
+    border-color: var(--blue-border);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--blue);
     outline-offset: 2px;
   }
 }
