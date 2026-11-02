@@ -10,6 +10,7 @@ if git diff --cached --quiet; then
   echo "No changes to push to DEV."
 else
   git commit -m "Pushed DEV frontend source files $(date '+%Y-%m-%d %H:%M:%S')"
+  git pull --rebase
   git push
 fi
 
@@ -28,5 +29,6 @@ if git diff --cached --quiet; then
   echo "No changes to push to PROD."
 else
   git commit -m "Pushed PROD frontend build files $(date '+%Y-%m-%d %H:%M:%S')"
+  git pull --rebase
   git push
 fi
