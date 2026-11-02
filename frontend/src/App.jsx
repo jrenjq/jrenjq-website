@@ -1,8 +1,11 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
+import profileImg from './assets/profile-pic.jpg'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import sgFlag from './assets/sg-flag.svg'
+import linkedinLogo from './assets/linkedin.svg'
+import githubLogo from './assets/github.svg'
+import instagramLogo from './assets/instagram.svg'
+import emailLogo from './assets/email.svg'
 import './App.css'
 
 function App() {
@@ -11,9 +14,7 @@ function App() {
     <>
       <section id="center">
         <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+          <img src={profileImg} className="base" style={{ borderRadius: 48 }} width="170" height="179" alt="" />
         </div>
         <div>
           <h1>Ren Jiaqi<span className="subscript"><img className="flag" src={sgFlag} alt="Singapore flag" /></span></h1>
@@ -26,9 +27,25 @@ function App() {
             </button>
           </div>
         </div>
+        <div className="socials">
+          <a className="social-tile" href="https://linkedin.com/in/jrenjq" target="_blank" rel="noreferrer">
+            <img src={linkedinLogo} alt="" />
+            <span>LinkedIn</span>
+          </a>
+          <a className="social-tile" href="https://github.com/jrenjq" target="_blank" rel="noreferrer">
+            <img src={githubLogo} alt="" />
+            <span>GitHub</span>
+          </a>
+          <a className="social-tile" href="https://instagram.com/jrenjq" target="_blank" rel="noreferrer">
+            <img src={instagramLogo} alt="" />
+            <span>Instagram</span>
+          </a>
+          <a className="social-tile" href="mailto:jrenjq@gmail.com" target="_blank" rel="noreferrer">
+            <img src={emailLogo} alt="" />
+            <span>Email</span>
+          </a>
+        </div>
       </section>
-
-      <div className="ticks"></div>
 
       <section id="next-steps">
         <div id="docs">

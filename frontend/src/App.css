@@ -2,8 +2,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 12px;
   margin-bottom: 24px;
+  margin-right: 16px; /* so that gap between both buttons is centered */
 }
 
 .tags button {
@@ -36,7 +37,6 @@
   border: 2px solid transparent;
   transition: border-color 0.3s;
   margin-bottom: 24px;
-  margin-right: 6px;
 
   &:hover {
     border-color: var(--purple-border);
@@ -56,7 +56,6 @@
   border: 2px solid transparent;
   transition: border-color 0.3s;
   margin-bottom: 24px;
-  margin-right: 6px;
 
   &:hover {
     border-color: var(--blue-border);
@@ -109,7 +108,7 @@
 #center {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 18px;
   place-content: center;
   place-items: center;
   flex-grow: 1;
@@ -211,24 +210,53 @@
   }
 }
 
-.ticks {
-  position: relative;
+.socials {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 120px));
+  justify-content: center;
+  gap: 12px;
   width: 100%;
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 120px);
+  }
+}
+
+.social-tile {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 8px;
+  background: var(--social-bg);
+  border: 1px solid var(--border);
+  text-decoration: none;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
+  img {
+    width: 48px;
+    height: 48px;
   }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
+
+  span {
+    font-size: 12px;
+    line-height: 1;
+    color: var(--text);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .social-tile .mono {
+    filter: invert(1) brightness(2); /* same trick your #social icons use */
   }
 }
