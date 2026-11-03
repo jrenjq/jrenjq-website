@@ -6,7 +6,43 @@ import linkedinLogo from './assets/linkedin.svg'
 import githubLogo from './assets/github.svg'
 import instagramLogo from './assets/instagram.svg'
 import emailLogo from './assets/email.svg'
+import Card from './components/Card'
 import './App.css'
+
+const projects = [
+  {
+    title: 'Project One',
+    subtitle: 'A short description of what it does',
+    icon: viteLogo,
+    type: 'project',
+    link: 'https://github.com/mysite1',
+    repo: 'https://github.com/jrenjq/project-one',
+  },
+  {
+    title: 'Project Two',
+    subtitle: 'Another whimsical tech trinket',
+    icon: reactLogo,
+    type: 'project',
+    repo: 'https://github.com/jrenjq/project-two',
+  },
+]
+
+const articles = [
+  {
+    title: 'Blog One',
+    subtitle: 'A short description of what it does',
+    icon: viteLogo,
+    type: 'article',
+    link: 'https://github.com/jrenjq/blog1',
+  },
+  {
+    title: 'Blog Two',
+    subtitle: 'Another article about something',
+    icon: reactLogo,
+    type: 'article',
+    link: 'https://github.com/jrenjq/blog2',
+  },
+]
 
 function App() {
 
@@ -23,7 +59,7 @@ function App() {
               software engineer
             </button>
             <button type="button" className="purple-bg-button bg-button-code">
-              hobbyist writer
+              blogger & writer
             </button>
           </div>
         </div>
@@ -47,83 +83,33 @@ function App() {
         </div>
       </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
+      <section id="highlights">
+        <div id="projects">
+          <h2>
+            <svg className="icon" role="presentation" aria-hidden="true">
+              <use href="/icons.svg#documentation-icon"></use>
+            </svg>
+            Tech Projects
+          </h2>
+          <p><i>fun apps i made that you can try online or view code</i></p>
+          <ul className="card-list">
+            {projects.map((project) => (
+              <Card key={project.title} {...project} />
+            ))}
           </ul>
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
+        <div id="articles">
+          <h2>
+            <svg className="icon" role="presentation" aria-hidden="true">
+              <use href="/icons.svg#social-icon"></use>
+            </svg>
+            Articles, Works, etc.
+          </h2>
+          <p><i>a collection of articles and works i wrote or related to me</i></p>
+          <ul className="card-list">
+            {articles.map((blog) => (
+              <Card key={blog.title} {...blog} />
+            ))}
           </ul>
         </div>
       </section>

@@ -4,7 +4,7 @@
   justify-content: center;
   gap: 12px;
   margin-bottom: 24px;
-  margin-right: 16px; /* so that gap between both buttons is centered */
+  margin-right: 8px; /* so that gap between both buttons is centered */
 }
 
 .tags button {
@@ -112,6 +112,7 @@
   place-content: center;
   place-items: center;
   flex-grow: 1;
+  padding: 64px 32px 48px; /* add this */
 
   @media (max-width: 1024px) {
     padding: 32px 20px 24px;
@@ -119,7 +120,7 @@
   }
 }
 
-#next-steps {
+#highlights {
   display: flex;
   border-top: 1px solid var(--border);
   text-align: left;
@@ -133,9 +134,10 @@
   }
 
   .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
+    margin-right: 4px;
+    vertical-align: text-bottom;
   }
 
   @media (max-width: 1024px) {
@@ -144,7 +146,7 @@
   }
 }
 
-#docs {
+#projects {
   border-right: 1px solid var(--border);
 
   @media (max-width: 1024px) {
@@ -153,51 +155,92 @@
   }
 }
 
-#next-steps ul {
+.card-list {
   list-style: none;
   padding: 0;
-  display: flex;
-  gap: 8px;
   margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
 
   @media (max-width: 1024px) {
     margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
+  }
+}
 
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
+.card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  text-align: left;
+  border-radius: 8px;
+  background: var(--social-bg);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.3s;
 
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.card-info {
+  flex: 1;
+  min-width: 0; /* lets long text wrap/truncate instead of overflowing */
+
+  h3 {
+    margin: 0 0 4px;
+    font-family: var(--heading);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-h);
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 130%;
+  }
+}
+
+.card-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  padding: 6px 12px;
+  font-size: 14px;
+  color: var(--text-h);
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  transition: border-color 0.3s;
+
+  &:hover {
+    border-color: var(--text);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  img {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (max-width: 480px) {
+    span {
+      display: none; /* icon-only button on small phones */
     }
   }
 }
@@ -252,11 +295,5 @@
     font-size: 12px;
     line-height: 1;
     color: var(--text);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .social-tile .mono {
-    filter: invert(1) brightness(2); /* same trick your #social icons use */
   }
 }
