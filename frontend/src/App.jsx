@@ -103,7 +103,7 @@ function App() {
             <svg className="icon" role="presentation" aria-hidden="true">
               <use href="/icons.svg#social-icon"></use>
             </svg>
-            Articles, Works, etc.
+            Blogs, Writings, etc.
           </h2>
           <p><i>a collection of my articles and works</i></p>
           <ul className="card-list">
