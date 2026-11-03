@@ -91,7 +91,7 @@ function App() {
             </svg>
             Tech Projects
           </h2>
-          <p><i>fun apps i made that you can try online or view code</i></p>
+          <p><i>fun apps i made to try now or view code</i></p>
           <ul className="card-list">
             {projects.map((project) => (
               <Card key={project.title} {...project} />
@@ -105,7 +105,7 @@ function App() {
             </svg>
             Articles, Works, etc.
           </h2>
-          <p><i>a collection of articles and works i wrote or related to me</i></p>
+          <p><i>a collection of my articles and works</i></p>
           <ul className="card-list">
             {articles.map((blog) => (
               <Card key={blog.title} {...blog} />
