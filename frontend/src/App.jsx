@@ -46,7 +46,7 @@ const projects = [
     subtitle: 'Snake game cloned in both C++ and Java: from an SIT university team assignment.',
     icon: snakeIcon,
     type: 'project',
-    repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
+    repo: 'https://github.com/jrenjq/Snake-Game-Clone',
   },
   {
     title: 'Dengue Season Predictor',
