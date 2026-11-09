@@ -1,4 +1,5 @@
 .card {
+  max-height: 160px;
   position: relative;
 }
 
@@ -25,8 +26,14 @@
 
 .card-actions {
   position: relative;
-  z-index: 1;
+  z-index: 1; /* keeps the buttons above the stretched card link */
   display: flex;
+  flex-direction: column; /* stack buttons top-bottom */
+  align-items: stretch;   /* both buttons take the same width */
   gap: 8px;
   flex-shrink: 0;
+}
+
+.card-link .play-svg {
+  color: #22c55e; /* green */
 }

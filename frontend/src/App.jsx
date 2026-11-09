@@ -6,13 +6,14 @@ import linkedinLogo from './assets/linkedin.svg'
 import githubLogo from './assets/github.svg'
 import instagramLogo from './assets/instagram.svg'
 import emailLogo from './assets/email.svg'
-import Card from './components/Card'
 import './App.css'
+import ProjectCard from './components/ProjectCard'
+import ArticleCard from './components/ArticleCard'
 
 const projects = [
   {
     title: 'Project One',
-    subtitle: 'A short description of what it does',
+    subtitle: 'A short description of what it does A short description of what it does A short description of what it does A short description of what it does',
     icon: viteLogo,
     type: 'project',
     link: 'https://github.com/mysite1',
@@ -20,7 +21,7 @@ const projects = [
   },
   {
     title: 'Project Two',
-    subtitle: 'Another whimsical tech trinket',
+    subtitle: 'Another whimsical tech trinket Another whimsical tech trinket',
     icon: reactLogo,
     type: 'project',
     repo: 'https://github.com/jrenjq/project-two',
@@ -30,14 +31,14 @@ const projects = [
 const articles = [
   {
     title: 'Blog One',
-    subtitle: 'A short description of what it does',
+    subtitle: 'A short description of what it does A short description of what it does',
     icon: viteLogo,
     type: 'article',
     link: 'https://github.com/jrenjq/blog1',
   },
   {
     title: 'Blog Two',
-    subtitle: 'Another article about something',
+    subtitle: 'Another article about something Another article about something',
     icon: reactLogo,
     type: 'article',
     link: 'https://github.com/jrenjq/blog2',
@@ -59,7 +60,7 @@ function App() {
               software engineer
             </button>
             <button type="button" className="purple-bg-button bg-button-code">
-              blogger & writer
+              writer & quester
             </button>
           </div>
         </div>
@@ -91,10 +92,10 @@ function App() {
             </svg>
             Tech Projects
           </h2>
-          <p><i>fun apps i made to try now or view code</i></p>
+          <p><i>whimsical and useful(?) apps i made</i></p>
           <ul className="card-list">
             {projects.map((project) => (
-              <Card key={project.title} {...project} />
+              <ProjectCard key={project.title} {...project} />
             ))}
           </ul>
         </div>
@@ -103,12 +104,12 @@ function App() {
             <svg className="icon" role="presentation" aria-hidden="true">
               <use href="/icons.svg#social-icon"></use>
             </svg>
-            Blogs, Writings, etc.
+            Writings & Quests
           </h2>
-          <p><i>a collection of my articles and works</i></p>
+          <p><i>collection of articles and adventures</i></p>
           <ul className="card-list">
-            {articles.map((blog) => (
-              <Card key={blog.title} {...blog} />
+            {articles.map((article) => (
+              <ArticleCard key={article.title} {...article} />
             ))}
           </ul>
         </div>
