@@ -1,6 +1,6 @@
 import './Card.css'
 
-function Card({ title, subtitle, icon, href, children }) {
+function Card({ title, subtitle, icon, href, tags, variant, children }) {
   return (
     <li className="card">
       <img className="card-icon" src={icon} alt="" />
@@ -10,6 +10,15 @@ function Card({ title, subtitle, icon, href, children }) {
             {title}
           </a>
         </h3>
+        {tags?.length > 0 && (
+          <ul className={`card-tags card-tags--${variant}`}>
+            {tags.map((tag) => (
+              <li key={tag}>
+                <code className="">{tag}</code>
+              </li>
+            ))}
+          </ul>
+        )}
         <p>{subtitle}</p>
       </div>
       {children && <div className="card-actions">{children}</div>}

@@ -37,3 +37,26 @@
 .card-link .play-svg {
   color: #22c55e; /* green */
 }
+
+.card-tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.card-tags code {
+  font-size: 12px;
+}
+
+.card-tags--blue code {
+  background: var(--blue-bg);
+  color: var(--blue);
+}
+
+.card-tags--purple code {
+  background: var(--purple-bg);
+  color: var(--purple);
+}

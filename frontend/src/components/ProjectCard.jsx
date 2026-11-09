@@ -2,9 +2,9 @@ import Card from './Card'
 import { PlayIcon } from './Icons'
 import githubLogo from '../assets/github.svg'
 
-function ProjectCard({ title, subtitle, icon, link, repo }) {
+function ProjectCard({ title, subtitle, icon, tags, link, repo }) {
   return (
-    <Card title={title} subtitle={subtitle} icon={icon} href={link ?? repo}>
+    <Card title={title} subtitle={subtitle} icon={icon} tags={tags} variant="blue" href={link ?? repo}>
       {link && (
         <a
           className="card-link"
