@@ -46,7 +46,7 @@ const projects = [
   {
     title: 'Snake Game Clone',
     tags: ['C++', 'Java'],
-    subtitle: 'Snake game cloned in both C++ and Java: from a uni team assignment.',
+    subtitle: 'Snake game cloned in both C++ and Java: from a team assignment in uni.',
     icon: snakeIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Snake-Game-Clone',
