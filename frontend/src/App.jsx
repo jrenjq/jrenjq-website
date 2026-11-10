@@ -35,7 +35,7 @@ const projects = [
   {
     title: 'Telegram Character Bot',
     tags: ['Python', 'AWS', 'Serverless', 'OpenAI'],
-    subtitle: 'Bot that mimck human replies: preset personality, profile, read/typing quirks.',
+    subtitle: 'Bot that mimics human replies: preset personality, profile, read/typing quirks.',
     icon: botIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Character-Roleplay-Automatic-Bots-Telegram',
