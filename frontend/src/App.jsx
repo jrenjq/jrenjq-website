@@ -71,7 +71,7 @@ const articles = [
     link: 'https://youtu.be/5FJ-h6TRjG0?t=4996',
   },
   {
-    title: 'From Harbour to High Seas',
+    title: 'From the Harbour to the High Seas',
     tags: ['blog', '2023'],
     subtitle: 'Medium article written during my internship for GovTech publicity & outreach.',
     icon: govtechIcon,
