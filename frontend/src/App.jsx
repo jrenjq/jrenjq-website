@@ -63,24 +63,24 @@ const projects = [
 
 const articles = [
   {
-    title: 'Speech: SIT ICT 2024 Graduation',
-    tags: ['2024', 'speech', 'graduation', 'SIT'],
+    title: 'SIT ICT 2024 Graduation',
+    tags: ['speech', '2024'],
     subtitle: 'Farewell speech I delivered for my university graduation: SIT ICT Class of 2024.',
     icon: graduationIcon,
     type: 'article',
     link: 'https://youtu.be/5FJ-h6TRjG0?t=4996',
   },
   {
-    title: 'Blog: From Harbour to High Seas',
-    tags: ['2023', 'blog', 'publicity', 'GovTech'],
+    title: 'From Harbour to High Seas',
+    tags: ['blog', '2023'],
     subtitle: 'Medium article written during my internship for GovTech publicity & outreach.',
     icon: govtechIcon,
     type: 'article',
     link: 'https://medium.com/@jrenjq/from-the-harbour-to-the-high-seas-776f8e6dc860',
   },
   {
-    title: 'Poem: Sungei Road Forever',
-    tags: ['2016', 'poetry', 'SG Heritage', 'VJC'],
+    title: 'Sungei Road Forever',
+    tags: ['poetry', '2016'],
     subtitle: 'Freeform poetry on Sungei Road Thieves Market closure. Published in VJC email list.',
     icon: sungeiIcon,
     type: 'article',
