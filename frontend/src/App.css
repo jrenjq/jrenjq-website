@@ -204,9 +204,7 @@
     font-size: 16px;
     font-weight: 500;
     color: var(--text-h);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* title stays on one line */
+    overflow-wrap: anywhere; /* breaks very long unbroken strings */
   }
 
   p {
