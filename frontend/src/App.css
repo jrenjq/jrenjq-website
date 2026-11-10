@@ -155,6 +155,10 @@
   }
 }
 
+#projects .icon {
+  color: var(--blue);
+}
+
 .card-list {
   list-style: none;
   padding: 0;

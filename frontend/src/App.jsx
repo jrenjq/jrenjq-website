@@ -1,6 +1,4 @@
 import profileImg from './assets/profile-pic.jpg'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import sgFlag from './assets/sg-flag.svg'
 import linkedinLogo from './assets/linkedin.svg'
 import githubLogo from './assets/github.svg'
@@ -14,6 +12,8 @@ import dengueIcon from './assets/stopdengue.jpg'
 import sungeiIcon from './assets/sungei-road.jpg'
 import govtechIcon from './assets/govtech-intern.png'
 import graduationIcon from './assets/graduation.png'
+import blogLogo from './assets/blog.svg'
+import codeLogo from './assets/code.svg'
 import './App.css'
 import ProjectCard from './components/ProjectCard'
 import ArticleCard from './components/ArticleCard'
@@ -130,9 +130,7 @@ function App() {
       <section id="highlights">
         <div id="projects">
           <h2>
-            <svg className="icon" role="presentation" aria-hidden="true">
-              <use href="/icons.svg#documentation-icon"></use>
-            </svg>
+            <img className="icon" src={codeLogo} alt="" />
             Tech Projects
           </h2>
           <p><i>software apps and whimsical builds</i></p>
@@ -144,9 +142,7 @@ function App() {
         </div>
         <div id="articles">
           <h2>
-            <svg className="icon" role="presentation" aria-hidden="true">
-              <use href="/icons.svg#social-icon"></use>
-            </svg>
+            <img className="icon" src={blogLogo} alt="" />
             Writings & Quests
           </h2>
           <p><i>collection of articles and adventures</i></p>
