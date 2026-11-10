@@ -65,7 +65,7 @@ const articles = [
   {
     title: 'Speech: SIT ICT 2024 Graduation',
     tags: ['2024', 'speech', 'graduation', 'SIT'],
-    subtitle: 'Farewell speech I had the honour to give for my uni graduation: SIT ICT Class of 2024.',
+    subtitle: 'Farewell speech I delivered for my uni graduation: SIT ICT Class of 2024.',
     icon: graduationIcon,
     type: 'article',
     link: 'https://youtu.be/5FJ-h6TRjG0?t=4996',
@@ -73,7 +73,7 @@ const articles = [
   {
     title: 'Blog: From Harbour to High Seas',
     tags: ['2023', 'blog', 'publicity', 'GovTech'],
-    subtitle: 'Medium article written (frankly) in my year-long internship for GovTech outreach.',
+    subtitle: 'Medium article written during my internship for GovTech outreach.',
     icon: govtechIcon,
     type: 'article',
     link: 'https://medium.com/@jrenjq/from-the-harbour-to-the-high-seas-776f8e6dc860',
