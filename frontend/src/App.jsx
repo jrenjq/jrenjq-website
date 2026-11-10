@@ -11,6 +11,9 @@ import morseCode from './assets/morse-code.png'
 import botIcon from './assets/bot.png'
 import snakeIcon from './assets/snakegame.png'
 import dengueIcon from './assets/stopdengue.jpg'
+import sungeiIcon from './assets/sungei-road.jpg'
+import govtechIcon from './assets/govtech-intern.png'
+import graduationIcon from './assets/graduation.png'
 import './App.css'
 import ProjectCard from './components/ProjectCard'
 import ArticleCard from './components/ArticleCard'
@@ -35,7 +38,7 @@ const projects = [
   {
     title: 'Telegram Character Bot',
     tags: ['Python', 'Serverless', 'AWS', 'OpenAI'],
-    subtitle: 'Bot that mimics human replies: preset personality, profile, read/typing quirks.',
+    subtitle: 'Bot that mimics human replies: with preset personality, profile, read/typing quirks.',
     icon: botIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Character-Roleplay-Automatic-Bots-Telegram',
@@ -60,20 +63,28 @@ const projects = [
 
 const articles = [
   {
-    title: 'Blog One',
-    tags: ['c', 'java', 'c++'],
-    subtitle: 'A short description of what it does A short description of what it does',
-    icon: viteLogo,
+    title: 'Speech: SIT ICT 2024 Graduation',
+    tags: ['2024', 'speech', 'graduation', 'SIT'],
+    subtitle: 'Farewell speech I had the honour to give for my uni graduation: SIT ICT Class of 2024.',
+    icon: graduationIcon,
     type: 'article',
-    link: 'https://github.com/jrenjq/blog1',
+    link: 'https://youtu.be/5FJ-h6TRjG0?t=4996',
   },
   {
-    title: 'Blog Two',
-    tags: ['c', 'java', 'c++'],
-    subtitle: 'Another article about something Another article about something',
-    icon: reactLogo,
+    title: 'Blog: From Harbour to High Seas',
+    tags: ['2023', 'blog', 'publicity', 'GovTech'],
+    subtitle: 'Medium article written (frankly) in my year-long internship for GovTech outreach.',
+    icon: govtechIcon,
     type: 'article',
-    link: 'https://github.com/jrenjq/blog2',
+    link: 'https://medium.com/@jrenjq/from-the-harbour-to-the-high-seas-776f8e6dc860',
+  },
+  {
+    title: 'Poem: Sungei Road Forever',
+    tags: ['2016', 'poetry', 'SG Heritage', 'VJC'],
+    subtitle: 'Freeform poetry on Sungei Road Thieves Market closure. Published in VJC email list.',
+    icon: sungeiIcon,
+    type: 'article',
+    link: 'https://drive.google.com/file/d/19xMk-GVRbCmrDy10ZIecfNpelRVdg6-J/view?usp=sharing',
   },
 ]
 
