@@ -19,7 +19,7 @@ const projects = [
   {
     title: 'Telegram Moderator Bot',
     tags: ['Golang', 'Claude'],
-    subtitle: 'Bot that uses Claude API to evaluate & delete vulgar content on uni telegram group.',
+    subtitle: 'Bot that uses Claude API to evaluate & delete vulgar texts on uni telegram group.',
     icon: miniSentry,
     type: 'project',
     repo: 'https://github.com/jrenjq/TelegramAutoModerator',
