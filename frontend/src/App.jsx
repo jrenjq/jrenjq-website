@@ -64,7 +64,7 @@ const projects = [
 const articles = [
   {
     title: 'SIT ICT 2024 Graduation',
-    tags: ['speech', '2024'],
+    tags: ['speech', '2024', 'video'],
     subtitle: 'Farewell speech I delivered for my university graduation: SIT ICT Class of 2024.',
     icon: graduationIcon,
     type: 'article',
@@ -72,7 +72,7 @@ const articles = [
   },
   {
     title: 'From the Harbour to the High Seas',
-    tags: ['blog', '2023'],
+    tags: ['blog', '2023', 'article'],
     subtitle: 'Medium article written during my internship for GovTech publicity & outreach.',
     icon: govtechIcon,
     type: 'article',
@@ -80,7 +80,7 @@ const articles = [
   },
   {
     title: 'Sungei Road Forever',
-    tags: ['poetry', '2016'],
+    tags: ['poetry', '2016', 'PDF'],
     subtitle: 'Freeform poetry on Sungei Road Thieves Market closure. Published in VJC email list.',
     icon: sungeiIcon,
     type: 'article',
