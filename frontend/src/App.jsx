@@ -17,25 +17,25 @@ import ArticleCard from './components/ArticleCard'
 
 const projects = [
   {
-    title: 'Auto Moderator Telegram Bot',
+    title: 'Telegram Moderator Bot',
     tags: ['Golang', 'Claude'],
-    subtitle: 'Bot that uses Claude API to evaluate & delete vulgar content on university telegram group.',
+    subtitle: 'Bot that uses Claude API to evaluate & delete vulgar content on uni telegram group.',
     icon: miniSentry,
     type: 'project',
     repo: 'https://github.com/jrenjq/TelegramAutoModerator',
   },
   {
     title: 'Morse Code Decoder',
-    tags: ['c'],
-    subtitle: 'Translates morse code input (.-/) into english text (abc): a low-level programming exercise.',
+    tags: ['C'],
+    subtitle: 'Translates morse code input (.-/) into english text: C struct, union, lib exercise.',
     icon: morseCode,
     type: 'project',
     repo: 'https://github.com/jrenjq/C-Morse-Code-Decoder',
   },
   {
-    title: 'Character Roleplay Telegram Bot',
-    tags: ['Python', 'MongoDB', 'AWS', 'OpenAI'],
-    subtitle: 'Bot that replies to telegram messages using unique personality, profile, and typing speeds.',
+    title: 'Telegram Character Bot',
+    tags: ['Python', 'AWS', 'Serverless', 'OpenAI'],
+    subtitle: 'Bot that mimck human replies: preset personality, profile, read/typing quirks.',
     icon: botIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Character-Roleplay-Automatic-Bots-Telegram',
@@ -50,7 +50,7 @@ const projects = [
   },
   {
     title: 'Dengue Season Predictor',
-    tags: ['Python', 'SciPy', 'Data.Gov.Sg'],
+    tags: ['Python', 'SciPy', 'Data.Gov'],
     subtitle: 'Forecasts upcoming dengue season using historic rainfall and dengue case datasets.',
     icon: dengueIcon,
     type: 'project',
@@ -124,7 +124,7 @@ function App() {
             </svg>
             Tech Projects
           </h2>
-          <p><i>gallery of weekend builds i made</i></p>
+          <p><i>software apps and whimsical builds</i></p>
           <ul className="card-list">
             {projects.map((project) => (
               <ProjectCard key={project.title} {...project} />
@@ -138,7 +138,7 @@ function App() {
             </svg>
             Writings & Quests
           </h2>
-          <p><i>collection of articles and fun adventures</i></p>
+          <p><i>collection of articles and adventures</i></p>
           <ul className="card-list">
             {articles.map((article) => (
               <ArticleCard key={article.title} {...article} />

@@ -14,7 +14,7 @@ function ProjectCard({ title, subtitle, icon, tags, link, repo }) {
           aria-label={`Try ${title}`}
         >
           <PlayIcon />
-          <span>Try Me!</span>
+          <span>Try!</span>
         </a>
       )}
       {repo && (
@@ -26,7 +26,7 @@ function ProjectCard({ title, subtitle, icon, tags, link, repo }) {
           aria-label={`${title} on GitHub`}
         >
           <img src={githubLogo} alt="" />
-          <span>GitHub</span>
+          <span>Code</span>
         </a>
       )}
     </Card>
