@@ -50,7 +50,7 @@ const projects = [
   },
   {
     title: 'Dengue Season Predictor',
-    tags: ['Python', 'SciPy', 'Data.Gov'],
+    tags: ['Python', 'SciPy', 'Data.Gov.Sg'],
     subtitle: 'Forecasts upcoming dengue season using historic rainfall and dengue case datasets.',
     icon: dengueIcon,
     type: 'project',
