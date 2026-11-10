@@ -51,7 +51,7 @@ const projects = [
   {
     title: 'Dengue Season Predictor',
     tags: ['Python', 'Tkinter', 'SciPy', 'Data.Gov.Sg'],
-    subtitle: 'Desktop app that forecasts upcoming dengue season via historic rainfall & dengue data.',
+    subtitle: 'Desktop app that forecasts upcoming dengue season via past rainfall & dengue data.',
     icon: dengueIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
