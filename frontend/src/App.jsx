@@ -17,6 +17,7 @@ import codeLogo from './assets/code.svg'
 import './App.css'
 import ProjectCard from './components/ProjectCard'
 import ArticleCard from './components/ArticleCard'
+import PaginatedList from './components/PaginatedList'
 
 const projects = [
   {
@@ -134,11 +135,11 @@ function App() {
             Tech Projects
           </h2>
           <p><i>software apps and whimsical builds</i></p>
-          <ul className="card-list">
-            {projects.map((project) => (
-              <ProjectCard key={project.title} {...project} />
-            ))}
-          </ul>
+          <PaginatedList
+            items={projects}
+            pageSize={5}
+            renderItem={(project) => <ProjectCard key={project.title} {...project} />}
+          />
         </div>
         <div id="articles">
           <h2>
@@ -146,11 +147,11 @@ function App() {
             Writings & Quests
           </h2>
           <p><i>collection of articles and adventures</i></p>
-          <ul className="card-list">
-            {articles.map((article) => (
-              <ArticleCard key={article.title} {...article} />
-            ))}
-          </ul>
+          <PaginatedList
+            items={articles}
+            pageSize={5}
+            renderItem={(article) => <ArticleCard key={article.title} {...article} />}
+          />
         </div>
       </section>
 
