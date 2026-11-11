@@ -29,12 +29,12 @@ const projects = [
     repo: 'https://github.com/jrenjq/TelegramAutoModerator',
   },
   {
-    title: 'Morse Code Decoder',
-    tags: ['C'],
-    subtitle: 'Translates morse code input (.-/) into english text: C struct, union, lib exercise.',
-    icon: morseCode,
+    title: 'Dengue Season Predictor',
+    tags: ['Python', 'Tkinter', 'SciPy', 'Data.Gov.Sg'],
+    subtitle: 'Desktop app that forecasts upcoming dengue season via past rainfall & dengue data.',
+    icon: dengueIcon,
     type: 'project',
-    repo: 'https://github.com/jrenjq/C-Morse-Code-Decoder',
+    repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
   },
   {
     title: 'Telegram Character Bot',
@@ -52,13 +52,13 @@ const projects = [
     type: 'project',
     repo: 'https://github.com/jrenjq/Snake-Game-Clone',
   },
-  {
-    title: 'Dengue Season Predictor',
-    tags: ['Python', 'Tkinter', 'SciPy', 'Data.Gov.Sg'],
-    subtitle: 'Desktop app that forecasts upcoming dengue season via past rainfall & dengue data.',
-    icon: dengueIcon,
+    {
+    title: 'Morse Code Decoder',
+    tags: ['C'],
+    subtitle: 'Translates morse code input (.-/) into english text: C struct, union, lib exercise.',
+    icon: morseCode,
     type: 'project',
-    repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
+    repo: 'https://github.com/jrenjq/C-Morse-Code-Decoder',
   },
 ]
 
@@ -137,7 +137,7 @@ function App() {
           <p><i>software apps and whimsical builds</i></p>
           <PaginatedList
             items={projects}
-            pageSize={5}
+            pageSize={4}
             renderItem={(project) => <ProjectCard key={project.title} {...project} />}
           />
         </div>
@@ -149,7 +149,7 @@ function App() {
           <p><i>collection of articles and adventures</i></p>
           <PaginatedList
             items={articles}
-            pageSize={5}
+            pageSize={4}
             renderItem={(article) => <ArticleCard key={article.title} {...article} />}
           />
         </div>
