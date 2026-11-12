@@ -168,7 +168,7 @@ function App() {
       </section>
       <section id="benefactors">
         <h2>Benefactors</h2>
-        <p><i>people & organisations who have supported me</i></p>
+        <p><i>people & organisations who supported me</i></p>
         <BenefactorCarousel items={benefactors} />
       </section>
 
