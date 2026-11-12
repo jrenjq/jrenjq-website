@@ -32,7 +32,7 @@ const projects = [
   {
     title: 'Telegram Character Bot',
     tags: ['Python', 'Serverless', 'AWS', 'OpenAI'],
-    subtitle: 'Bot that replies like a human on Telegram with configurable personality and profile.',
+    subtitle: 'Bot that replies like a human on Telegram with configurable personality and profile info.',
     icon: botIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Character-Roleplay-Automatic-Bots-Telegram',
