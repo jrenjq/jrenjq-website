@@ -109,8 +109,13 @@ function App() {
         <div className="hero">
           <img src={profileImg} className="base" style={{ borderRadius: 48 }} width="170" height="179" alt="" />
         </div>
-        <div>
-          <h1>Ren Jiaqi<span className="subscript"><img className="flag" src={sgFlag} alt="Singapore flag" /></span></h1>
+        <div className="intro">
+          <h1 className="name-row">
+            <span className="name">Ren Jiaqi</span>
+            <span className="subscript">
+              <img className="flag" src={sgFlag} alt="Singapore flag" />
+            </span>
+          </h1>
           <div className="tags">
             <button type="button" className="blue-bg-button bg-button-code">
               software engineer
@@ -172,7 +177,6 @@ function App() {
         <BenefactorCarousel items={benefactors} />
       </section>
 
-      <div className="ticks"></div>
       <section id="spacer"></section>
     </>
   )
