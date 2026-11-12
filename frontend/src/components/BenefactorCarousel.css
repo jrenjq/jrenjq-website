@@ -1,0 +1,78 @@
+.carousel-track {
+  list-style: none;
+  padding: 4px 2px 8px; /* room for the hover shadow */
+  margin: 24px 0 0;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none; /* Firefox */
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.benefactor-card {
+  flex: 0 0 220px;
+  scroll-snap-align: start;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px 16px;
+  text-align: center;
+  border-radius: 8px;
+  background: var(--social-bg);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+
+  h3 {
+    margin: 0;
+    font-family: var(--heading);
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text-h);
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 130%;
+  }
+}
+
+.benefactor-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 6px;
+  border-radius: 50%;
+  font-family: var(--mono);
+  font-size: 16px;
+}
+
+.benefactor-avatar--people {
+  color: var(--purple);
+  background: var(--purple-bg);
+}
+
+.benefactor-avatar--organisation {
+  color: var(--blue);
+  background: var(--blue-bg);
+}
+
+#benefactors {
+  padding: 32px;
+  border-top: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    padding: 24px 20px;
+  }
+}

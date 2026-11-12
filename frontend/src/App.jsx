@@ -18,6 +18,7 @@ import './App.css'
 import ProjectCard from './components/ProjectCard'
 import ArticleCard from './components/ArticleCard'
 import PaginatedList from './components/PaginatedList'
+import BenefactorCarousel from './components/BenefactorCarousel'
 
 const projects = [
   {
@@ -89,6 +90,17 @@ const articles = [
   },
 ]
 
+const benefactors = [
+  { name: 'Mentor Muhammad', organisation: 'SIT ICT mentor', type: 'people' },
+  { name: 'Encik Sim', organisation: 'NS commander', type: 'people' },
+  { name: 'Edwin Low', organisation: 'Pri sch teacher ', type: 'people' },
+  { name: 'Mdm Norita', organisation: 'Pri sch teacher', type: 'people' },
+  { name: 'Dr Jeannie Lee', organisation: 'SIT uni prof', type: 'people' },
+  { name: 'Dr David Baena', organisation: 'SIT uni prof', type: 'people' },
+  { name: 'KKH Scholarship', organisation: 'Wilmar International', type: 'organisation' },
+  { name: 'Work Study Degree', organisation: 'SIT & GovTech', type: 'organisation' },
+]
+
 function App() {
 
   return (
@@ -153,6 +165,11 @@ function App() {
             renderItem={(article) => <ArticleCard key={article.title} {...article} />}
           />
         </div>
+      </section>
+      <section id="benefactors">
+        <h2>Benefactors</h2>
+        <p><i>people and organisations who have supported me</i></p>
+        <BenefactorCarousel items={benefactors} />
       </section>
 
       <div className="ticks"></div>
