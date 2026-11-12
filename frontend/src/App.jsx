@@ -30,20 +30,20 @@ const projects = [
     repo: 'https://github.com/jrenjq/TelegramAutoModerator',
   },
   {
-    title: 'Dengue Season Predictor',
-    tags: ['Python', 'Tkinter', 'SciPy', 'Data.Gov.Sg'],
-    subtitle: 'Desktop app that forecasts upcoming dengue season via past rainfall & dengue data.',
-    icon: dengueIcon,
-    type: 'project',
-    repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
-  },
-  {
     title: 'Telegram Character Bot',
     tags: ['Python', 'Serverless', 'AWS', 'OpenAI'],
     subtitle: 'Bot that replies like a human on Telegram with configurable personality and profile.',
     icon: botIcon,
     type: 'project',
     repo: 'https://github.com/jrenjq/Character-Roleplay-Automatic-Bots-Telegram',
+  },
+  {
+    title: 'Dengue Season Predictor',
+    tags: ['Python', 'Tkinter', 'SciPy', 'Data.Gov.Sg'],
+    subtitle: 'Desktop app that forecasts upcoming dengue season via past rainfall & dengue data.',
+    icon: dengueIcon,
+    type: 'project',
+    repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
   },
   {
     title: 'Snake Game Clone',
@@ -53,7 +53,7 @@ const projects = [
     type: 'project',
     repo: 'https://github.com/jrenjq/Snake-Game-Clone',
   },
-    {
+  {
     title: 'Morse Code Decoder',
     tags: ['C'],
     subtitle: 'Translates morse code input (.-/) into english text: C struct, union, lib exercise.',
