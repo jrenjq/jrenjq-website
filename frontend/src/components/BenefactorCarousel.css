@@ -46,6 +46,19 @@
   }
 }
 
+@media (max-width: 1024px) {
+  .carousel-track {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: 200px;
+  }
+
+  .benefactor-card {
+    flex: none; /* flex sizing no longer applies in grid */
+  }
+}
+
 .benefactor-avatar {
   display: flex;
   align-items: center;
