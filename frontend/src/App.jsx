@@ -96,7 +96,7 @@ const benefactors = [
   { name: 'Mr Edwin Low', organisation: 'Pri sch teacher ', type: 'people' },
   { name: 'Mdm Norita Washil', organisation: 'Pri sch teacher', type: 'people' },
   { name: 'Dr Jeannie Lee', organisation: 'SIT uni professor', type: 'people' },
-  { name: 'Dr David Baena', organisation: 'SIT uni professro', type: 'people' },
+  { name: 'Dr David Baena', organisation: 'SIT uni professor', type: 'people' },
   { name: 'KKH Scholarship', organisation: 'Wilmar International', type: 'organisation' },
   { name: 'Work Study Degree', organisation: 'SIT & GovTech', type: 'organisation' },
 ]
