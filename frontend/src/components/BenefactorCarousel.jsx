@@ -24,6 +24,8 @@ function BenefactorCarousel({ items }) {
   const trackRef = useRef(null)
   const [canPrev, setCanPrev] = useState(false)
   const [canNext, setCanNext] = useState(false)
+  const [pageCount, setPageCount] = useState(1)
+  const [activePage, setActivePage] = useState(0)
 
   // Shuffled once on mount, so the order stays stable while the page is open
   const [shuffled] = useState(() => shuffle(items))
@@ -31,8 +33,18 @@ function BenefactorCarousel({ items }) {
   const update = useCallback(() => {
     const el = trackRef.current
     if (!el) return
+    const maxScroll = el.scrollWidth - el.clientWidth
+
     setCanPrev(el.scrollLeft > 4)
-    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 4)
+    setCanNext(el.scrollLeft < maxScroll - 4)
+
+    // One "page" = one visible width of cards
+    const pages = Math.max(1, Math.ceil(el.scrollWidth / el.clientWidth - 0.01))
+    setPageCount(pages)
+
+    // Map scroll progress onto the dots, so the last dot is active at the very end
+    const progress = maxScroll > 0 ? el.scrollLeft / maxScroll : 0
+    setActivePage(Math.round(progress * (pages - 1)))
   }, [])
 
   useEffect(() => {
@@ -80,6 +92,22 @@ function BenefactorCarousel({ items }) {
             <polyline points="15 18 9 12 15 6" />
           </svg>
         </button>
+
+        {pageCount > 1 && (
+          <div
+            className="carousel-dots"
+            role="img"
+            aria-label={`Page ${activePage + 1} of ${pageCount}`}
+          >
+            {Array.from({ length: pageCount }, (_, i) => (
+              <span
+                key={i}
+                className={`carousel-dot${i === activePage ? ' carousel-dot--active' : ''}`}
+              />
+            ))}
+          </div>
+        )}
+
         <button
           type="button"
           className="pagination-btn"

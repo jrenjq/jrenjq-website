@@ -1,3 +1,12 @@
+#benefactors {
+  padding: 32px;
+  border-top: 1px solid var(--border);
+
+  @media (max-width: 1024px) {
+    padding: 24px 20px;
+  }
+}
+
 .carousel-track {
   list-style: none;
   padding: 4px 2px 8px; /* room for the hover shadow */
@@ -46,19 +55,6 @@
   }
 }
 
-@media (max-width: 1024px) {
-  .carousel-track {
-    display: grid;
-    grid-template-rows: repeat(2, auto);
-    grid-auto-flow: column;
-    grid-auto-columns: 200px;
-  }
-
-  .benefactor-card {
-    flex: none; /* flex sizing no longer applies in grid */
-  }
-}
-
 .benefactor-avatar {
   display: flex;
   align-items: center;
@@ -81,11 +77,36 @@
   background: var(--blue-bg);
 }
 
-#benefactors {
-  padding: 32px;
-  border-top: 1px solid var(--border);
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-  @media (max-width: 1024px) {
-    padding: 24px 20px;
+.carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-h);
+  opacity: 0.35;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.carousel-dot--active {
+  opacity: 1;
+  transform: scale(1.25);
+}
+
+/* Mobile: 2 rows, scrolling sideways */
+@media (max-width: 1024px) {
+  .carousel-track {
+    display: grid;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: 200px;
+  }
+
+  .benefactor-card {
+    flex: none; /* flex sizing no longer applies in grid */
   }
 }
