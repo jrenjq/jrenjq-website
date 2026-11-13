@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect, useCallback, useMemo } from 'react'
 import './BenefactorCarousel.css'
 
 function initials(name) {
@@ -28,7 +28,7 @@ function BenefactorCarousel({ items }) {
   const [activePage, setActivePage] = useState(0)
 
   // Shuffled once on mount, so the order stays stable while the page is open
-  const [shuffled] = useState(() => shuffle(items))
+  const shuffled = useMemo(() => shuffle(items), [items])
 
   const update = useCallback(() => {
     const el = trackRef.current
@@ -56,7 +56,7 @@ function BenefactorCarousel({ items }) {
       el.removeEventListener('scroll', update)
       window.removeEventListener('resize', update)
     }
-  }, [update])
+  }, [update, shuffled])
 
   const scrollByPage = (dir) => {
     const el = trackRef.current

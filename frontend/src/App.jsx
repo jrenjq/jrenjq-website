@@ -4,104 +4,38 @@ import linkedinLogo from './assets/linkedin.svg'
 import githubLogo from './assets/github.svg'
 import instagramLogo from './assets/instagram.svg'
 import emailLogo from './assets/email.svg'
-import miniSentry from './assets/minisentry.png'
-import morseCode from './assets/morse-code.png'
-import botIcon from './assets/bot.png'
-import snakeIcon from './assets/snakegame.png'
-import dengueIcon from './assets/stopdengue.jpg'
-import sungeiIcon from './assets/sungei-road.jpg'
-import govtechIcon from './assets/govtech-intern.png'
-import graduationIcon from './assets/graduation.png'
 import blogLogo from './assets/blog.svg'
 import codeLogo from './assets/code.svg'
-import './App.css'
 import ProjectCard from './components/ProjectCard'
 import ArticleCard from './components/ArticleCard'
 import PaginatedList from './components/PaginatedList'
 import BenefactorCarousel from './components/BenefactorCarousel'
+import { useState, useEffect } from 'react'
+import './App.css'
 
-const projects = [
-  {
-    title: 'Telegram Moderator Bot',
-    tags: ['Golang', 'Claude'],
-    subtitle: 'Bot that uses Claude API to evaluate & delete vulgar texts on uni telegram group.',
-    icon: miniSentry,
-    type: 'project',
-    repo: 'https://github.com/jrenjq/TelegramAutoModerator',
-  },
-  {
-    title: 'Telegram Character Bot',
-    tags: ['Python', 'Serverless', 'AWS', 'OpenAI'],
-    subtitle: 'Bot that replies like a human on Telegram with configurable personality and profile info.',
-    icon: botIcon,
-    type: 'project',
-    repo: 'https://github.com/jrenjq/Character-Roleplay-Automatic-Bots-Telegram',
-  },
-  {
-    title: 'Dengue Season Predictor',
-    tags: ['Python', 'Tkinter', 'SciPy', 'Data.Gov.Sg'],
-    subtitle: 'Desktop app that forecasts upcoming dengue season via past rainfall & dengue data.',
-    icon: dengueIcon,
-    type: 'project',
-    repo: 'https://github.com/jrenjq/Dengue-Season-Predictor',
-  },
-  {
-    title: 'Snake Game Clone',
-    tags: ['C++', 'Java'],
-    subtitle: 'Snake game cloned in both C++ and Java: from a team assignment in uni.',
-    icon: snakeIcon,
-    type: 'project',
-    repo: 'https://github.com/jrenjq/Snake-Game-Clone',
-  },
-  {
-    title: 'Morse Code Decoder',
-    tags: ['C'],
-    subtitle: 'Translates morse code input (.-/) into english text: C struct, union, lib exercise.',
-    icon: morseCode,
-    type: 'project',
-    repo: 'https://github.com/jrenjq/C-Morse-Code-Decoder',
-  },
-]
+// Empty in development (the Vite proxy handles /api); the backend URL in production
+const API = import.meta.env.VITE_API_URL ?? ''
 
-const articles = [
-  {
-    title: 'SIT ICT 2024 Graduation',
-    tags: ['speech', '2024', 'video'],
-    subtitle: 'Farewell speech I delivered for my university graduation: SIT ICT Class of 2024.',
-    icon: graduationIcon,
-    type: 'article',
-    link: 'https://youtu.be/5FJ-h6TRjG0?t=4996',
-  },
-  {
-    title: 'From the Harbour to the High Seas',
-    tags: ['blog', '2023', 'article'],
-    subtitle: 'Medium article written during my internship for GovTech publicity & outreach.',
-    icon: govtechIcon,
-    type: 'article',
-    link: 'https://medium.com/@jrenjq/from-the-harbour-to-the-high-seas-776f8e6dc860',
-  },
-  {
-    title: 'Sungei Road Forever',
-    tags: ['poetry', '2016', 'PDF'],
-    subtitle: 'Freeform poetry on Sungei Road Thieves Market closure. Published in VJC email list.',
-    icon: sungeiIcon,
-    type: 'article',
-    link: 'https://drive.google.com/file/d/19xMk-GVRbCmrDy10ZIecfNpelRVdg6-J/view?usp=sharing',
-  },
-]
+function useFetch(path) {
+  const [data, setData] = useState([])
 
-const benefactors = [
-  { name: 'Mohd. Noor Ariffin', organisation: 'SIT ICT mentor', type: 'people' },
-  { name: 'Encik Sim', organisation: 'NS commander', type: 'people' },
-  { name: 'Mr Edwin Low', organisation: 'Pri sch teacher ', type: 'people' },
-  { name: 'Mdm Norita Washil', organisation: 'Pri sch teacher', type: 'people' },
-  { name: 'Dr Jeannie Lee', organisation: 'SIT uni professor', type: 'people' },
-  { name: 'Dr David Baena', organisation: 'SIT uni professor', type: 'people' },
-  { name: 'KKH Scholarship', organisation: 'Wilmar International', type: 'organisation' },
-  { name: 'Work Study Degree', organisation: 'SIT & GovTech', type: 'organisation' },
-]
+  useEffect(() => {
+    fetch(`${API}${path}`)
+      .then((r) => r.json())
+      .then((rows) =>
+        // API returns relative image paths like /api/images/<id>, so prefix them
+        setData(rows.map((r) => (r.icon ? { ...r, icon: `${API}${r.icon}` } : r)))
+      )
+      .catch(console.error)
+  }, [path])
+
+  return data
+}
 
 function App() {
+  const projects = useFetch('/api/projects')
+  const articles = useFetch('/api/articles')
+  const benefactors = useFetch('/api/benefactors')
 
   return (
     <>
@@ -154,8 +88,8 @@ function App() {
           <p><i>software apps and whimsical builds</i></p>
           <PaginatedList
             items={projects}
-            pageSize={4}
-            renderItem={(project) => <ProjectCard key={project.title} {...project} />}
+            pageSize={5}
+            renderItem={(project) => <ProjectCard key={project.id} {...project} />}
           />
         </div>
         <div id="articles">
@@ -166,14 +100,15 @@ function App() {
           <p><i>collection of articles and adventures</i></p>
           <PaginatedList
             items={articles}
-            pageSize={4}
-            renderItem={(article) => <ArticleCard key={article.title} {...article} />}
+            pageSize={5}
+            renderItem={(article) => <ArticleCard key={article.id} {...article} />}
           />
         </div>
       </section>
+
       <section id="benefactors">
-        <h2>🙏Benefactors</h2>
-        <p><i>generous organisations & supportive figures</i></p>
+        <h2>Benefactors</h2>
+        <p><i>people and organisations who have supported me</i></p>
         <BenefactorCarousel items={benefactors} />
       </section>
 
