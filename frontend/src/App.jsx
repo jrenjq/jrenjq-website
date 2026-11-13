@@ -55,7 +55,7 @@ function App() {
               software engineer
             </button>
             <button type="button" className="purple-bg-button bg-button-code">
-              writer sidequester
+              writer quest-doer
             </button>
           </div>
         </div>
