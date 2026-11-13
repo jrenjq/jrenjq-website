@@ -55,7 +55,7 @@ function App() {
               software engineer
             </button>
             <button type="button" className="purple-bg-button bg-button-code">
-              writer & quester
+              writer sidequester
             </button>
           </div>
         </div>
@@ -107,8 +107,8 @@ function App() {
       </section>
 
       <section id="benefactors">
-        <h2>Benefactors</h2>
-        <p><i>people and organisations who have supported me</i></p>
+        <h2>🙏Benefactors</h2>
+        <p><i>generous organisations & supportive figures</i></p>
         <BenefactorCarousel items={benefactors} />
       </section>
 
