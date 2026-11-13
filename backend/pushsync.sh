@@ -14,7 +14,7 @@ else
   git push
 fi
 
-# 2. sync with prod repo
+# 2. sync with prod repo, exclude things in DEV repo that don't need to be in PROD
 rsync -a --delete --exclude='venv' --exclude='__pycache__' --exclude='pushsync.sh' --exclude='seed_assets' --exclude='seed.py' . "$PROD_DIR"
 
 # 3. commit and push to PROD repo, but only if something actually changed
