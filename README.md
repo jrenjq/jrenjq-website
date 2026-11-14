@@ -77,6 +77,14 @@ systemctl daemon-reload
 systemctl enable --now myapp
 curl http://127.0.0.1:8000/api/ping    # should print {"message":"pong"}
 ```
+To change number of workers later on (usual rule is (2 × CPU cores) + 1):
+`sudo nano /etc/systemd/system/myapp.service`
+> Change the number of workers
+```
+sudo systemctl daemon-reload
+sudo systemctl restart myapp
+sudo systemctl status myapp
+```
 ## C. Add Frontend (React)
 ### 1. (ON OWN COMPUTER) Scaffold React frontend with NPM
 ```
