@@ -66,7 +66,7 @@ After=network.target
 User=www-data
 Group=www-data
 WorkingDirectory=/opt/myapp/backend
-ExecStart=/opt/myapp/backend/venv/bin/gunicorn --workers 1 --bind 127.0.0.1:8000 app:app
+ExecStart=/opt/myapp/backend/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8000 app:app
 Restart=always
 
 [Install]
