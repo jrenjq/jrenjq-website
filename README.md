@@ -79,7 +79,7 @@ curl http://127.0.0.1:8000/api/ping    # should print {"message":"pong"}
 ```
 To change number of workers later on (usual rule is (2 × CPU cores) + 1):
 `sudo nano /etc/systemd/system/myapp.service`
-> Change the number of workers
+Change the number of workers
 ```
 sudo systemctl daemon-reload
 sudo systemctl restart myapp
@@ -332,4 +332,55 @@ else
   git commit -m "Pushed PROD backend files $(date '+%Y-%m-%d %H:%M:%S')"
   git push
 fi
+```
+## G. Frontend
+
+## H. Backend
+
+## I. Cache using NGINX
+### 1. Set up cache directory
+/etc/nginx/conf.d/api-cache.conf
+```
+proxy_cache_path /var/cache/nginx/api
+                 levels=1:2
+                 keys_zone=apicache:10m
+                 max_size=100m
+                 inactive=7d
+                 use_temp_path=off;
+```
+### 2. Add cache logic to site’s server block, above your existing /api/ location:
+```
+location /api/images/ {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    proxy_cache apicache;
+    proxy_cache_valid 200 7d;
+    proxy_cache_valid 404 1m;
+    proxy_cache_lock on;
+    proxy_cache_use_stale error timeout updating;
+    add_header X-Cache-Status $upstream_cache_status always;
+}
+
+location ~ ^/api/(projects|articles|benefactors)$ {
+    proxy_pass http://127.0.0.1:8000;
+    proxy_set_header Host $host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+
+    proxy_cache apicache;
+    proxy_cache_valid 200 1m;
+    proxy_cache_lock on;
+    proxy_cache_use_stale error timeout updating;
+    add_header X-Cache-Status $upstream_cache_status always;
+}
+```
+### 3. Apply NGINX changes
+```
+sudo nginx -t && sudo systemctl reload nginx
+```
+### 4. Test changes
+```
+curl -sI https://jrenjq.com/api/images/<id> | grep -i x-cache-status
+curl -sI https://jrenjq.com/api/projects | grep -i x-cache-status
 ```
