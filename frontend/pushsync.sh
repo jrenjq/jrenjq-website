@@ -4,7 +4,7 @@ set -e    # stop immediately if any step fails
 SRC_DIR="$(cd "$(dirname "$0")" && pwd)"    # folder this script lives in (the source repo)
 PROD_DIR="$SRC_DIR/../../jrenjq-website-PROD/frontend"    # destination of build files 
 
-# 1. commit and push source files to DEV repo, but only if something actually chanced
+# 1. commit and push source files to DEV repo, but only if something actually changed
 git add -A
 if git diff --cached --quiet; then
   echo "No changes to push to DEV."
