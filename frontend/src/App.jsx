@@ -88,7 +88,7 @@ function App() {
           <p><i>software apps and whimsical builds</i></p>
           <PaginatedList
             items={projects}
-            pageSize={5}
+            pageSize={4}
             renderItem={(project) => <ProjectCard key={project.id} {...project} />}
           />
         </div>
@@ -100,7 +100,7 @@ function App() {
           <p><i>collection of articles and adventures</i></p>
           <PaginatedList
             items={articles}
-            pageSize={5}
+            pageSize={4}
             renderItem={(article) => <ArticleCard key={article.id} {...article} />}
           />
         </div>
