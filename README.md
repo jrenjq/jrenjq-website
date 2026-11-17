@@ -2,6 +2,10 @@
 
 Production setup and deployment notes for jrenjq.com: React frontend, Flask backend, MongoDB Atlas, served by nginx on a DigitalOcean droplet.
 
+**Related READMEs**
+> [Frontend Implementation](frontend/README.md)
+> [Backend Implementation](backend/README.md)
+
 **Contents**
  
 - [A. DigitalOcean Ubuntu Droplet First-time Setup](#a-digitalocean-ubuntu-droplet-first-time-setup)
