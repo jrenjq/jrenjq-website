@@ -244,6 +244,10 @@ ExecStart=/opt/myapp/backend/venv/bin/gunicorn --workers 2 --bind 127.0.0.1:8000
 ```
 Gunicorn imports `app.py`, so the `app.run(debug=True)` block at the bottom is ignored there. After pulling new backend code, install any new dependencies and restart the service. Gunicorn doesn't reload code on its own:
 ```
+# in dev environment
+bash pushsync.sh    # pushes DEV code and sync with PROD repo
+
+# in DigitalOcean droplet
 cd /opt/myapp && git pull
 cd backend && source venv/bin/activate
 python -m pip install -r requirements.txt        # only if dependencies changed
