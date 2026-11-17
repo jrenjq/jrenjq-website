@@ -1,9 +1,10 @@
 # jrenjq-website
 
-Production setup and deployment notes for jrenjq.com: React frontend, Flask backend, MongoDB Atlas, served by nginx on a DigitalOcean droplet.
+Production setup and deployment notes for jrenjq.com: React frontend, Flask backend, MongoDB Atlas, served by nginx on a DigitalOcean droplet. For information about frontend or backend specifically, see 'Related READMEs' below.
 
 **Related READMEs**
 > [Frontend Implementation](frontend/README.md)
+
 > [Backend Implementation](backend/README.md)
 
 **Contents**
