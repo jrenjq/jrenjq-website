@@ -369,6 +369,6 @@ The skeleton uses the site's color variables, so it works in light and dark mode
 ```
 npm install
 npm run dev        # Vite dev server, proxying /api to Flask on port 5000
-npm run build      # outputs dist/
+bash pushsync.sh   # builds and syncs build files with PROD repo
 ```
 The Flask backend must be running for the lists to load. See the [main README](../README.md) for local setup and deployment.
