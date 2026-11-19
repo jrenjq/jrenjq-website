@@ -222,9 +222,16 @@
     line-height: 130%;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3; /* subtitle shows at most 3 lines */
+    -webkit-line-clamp: 3;      /* desktop: subtitle shows at most 3 lines */
     line-clamp: 3;
     overflow: hidden;
+
+    @media (max-width: 1024px) {
+      display: block;           /* mobile: show the full subtitle */
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+      overflow: visible;
+    }
   }
 }
 

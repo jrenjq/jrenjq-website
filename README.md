@@ -836,3 +836,91 @@ npm run dev                                    # Vite proxies /api to localhost:
 - `backend/.env` needs `MONGO_URI` as well.
 - Open the project from the WSL terminal with `code .` so VS Code runs inside WSL (bottom-left shows **WSL: Ubuntu**), then pick `backend/venv/bin/python` under **Python: Select Interpreter**.
 - Ubuntu blocks system-wide `pip install` (`externally-managed-environment`). Always install inside the venv.
+
+---
+
+## L. SEO (Google Search)
+By default a Vite site has a generic title and no description, so Google shows a poor result for it. This section sets the search title and description, the link preview, and registers the site with Google Search Console.
+
+### 1. Page title, description and link previews
+Set these in `frontend/index.html`, inside `<head>`:
+```html
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#16171d" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <title>Ren Jiaqi | Software Engineer & Writer</title>
+    <meta name="description" content="Ren Jiaqi | Singapore software engineer and writer | Contact | Tech projects, articles and writings, etc." />
+    <link rel="canonical" href="https://jrenjq.com/" />
+
+    <!-- Link previews (WhatsApp, Telegram, LinkedIn, etc.) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Ren Jiaqi | Software Engineer & Writer" />
+    <meta property="og:description" content="Ren Jiaqi | Singapore software engineer and writer | Contact | Tech projects, articles and writings, etc." />
+    <meta property="og:url" content="https://jrenjq.com/" />
+    <meta property="og:image" content="https://jrenjq.com/preview.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>Ren Jiaqi: software engineer and writer. Portfolio of tech projects and articles.</noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+```
+
+| Tag | What it does |
+|---|---|
+| `<title>` | The blue headline in a Google result. Keep it under about 60 characters, and make it say who you are (the default `Home` tells a result nothing). |
+| `meta name="description"` | The text under the headline. Aim for 120 to 160 characters, because Google cuts off longer ones. |
+| `link rel="canonical"` | Tells Google which URL is the main one, so `www` and non-`www` versions aren't treated as different pages. |
+| `og:*` and `twitter:card` | Control the title, description and picture when the link is shared on WhatsApp, Telegram or LinkedIn. |
+| `theme-color` | Colors the mobile browser's address bar to match the page background (`#16171d`). |
+| `<noscript>` | A line of text for crawlers that don't run JavaScript. The page content is loaded by React after the page starts, so the raw HTML otherwise has an empty `<div id="root">`. |
+
+Put the share image in `frontend/public/` as `preview.png` (about 1200 x 630). Vite copies that folder to the site root, so it is served at `https://jrenjq.com/preview.png`. Use a full URL in `og:image`, because crawlers don't resolve relative paths. The favicon lives in `frontend/public/` the same way (`favicon.svg`).
+
+### 2. Deploy and check
+1. Run `bash pushsync.sh` in `frontend/`, then `git pull --rebase` in `/opt/myapp` on the droplet (see D.2).
+2. Open `https://jrenjq.com/` in a private window and use **View page source**. The new title and description should be there.
+
+### 3. Register the site with Google Search Console
+Verification proves you own the domain. It is done with a DNS record, so it needs no change to the site.
+
+1. Go to https://search.google.com/search-console, choose **Add property**, pick **Domain**, and enter `jrenjq.com` (no `https://` and no `www`). A domain property covers `www`, `http` and `https` together.
+2. Google shows a TXT value starting with `google-site-verification=`. Click **Copy**.
+3. In Namecheap, go to **Domain List → Manage → Advanced DNS → Add New Record** and add:
+
+| Type | Host | Value | TTL |
+|---|---|---|---|
+| TXT Record | `@` | the full `google-site-verification=...` text | Automatic |
+
+4. Save with the green checkmark, then click **Verify** in Search Console.
+
+Leave the A records for `@` and `www` as they are. Keep the TXT record afterwards, since deleting it can make Google revoke the verification. Don't put the token in this repo.
+
+**If verification fails:** Google lists the TXT records it found. Namecheap also adds an SPF record (`v=spf1 include:spf.efwd.registrar-servers.com ~all`) for email forwarding, so seeing only that one means the new record isn't live yet.
+```
+dig TXT jrenjq.com @8.8.8.8 +short       # your google-site-verification=... line should appear
+```
+- If it isn't listed, wait (DNS can take up to an hour or two), then click **Verify** again.
+- If it is listed but Google still fails, compare the value in Namecheap with the **Copy** button's text, with no extra spaces or quotation marks.
+- Check that **Nameservers** is set to **Namecheap BasicDNS**, otherwise records in Advanced DNS aren't used.
+- Fallback that doesn't need DNS: add a **URL prefix** property for `https://jrenjq.com/`, choose the **HTML tag** method, paste the `<meta name="google-site-verification" ...>` line into `<head>` in `index.html`, redeploy, then **Verify**.
+
+### 4. Ask Google to index the page
+1. In Search Console, paste `https://jrenjq.com/` into the **Inspect any URL** bar at the top.
+2. Optionally click **Test live URL** first, to confirm Google can fetch the page and see the new tags.
+3. Click **Request indexing**. A new site often shows **URL is not on Google**, which is normal.
+
+### 5. What to expect
+- **It isn't instant.** Indexing can take days to weeks, and the new title and description may appear later still. Repeated requests don't speed it up.
+- **Google may rewrite the snippet** to match the search query. A clear description gives the best chance of it being used.
+- **Check progress** by searching `site:jrenjq.com`, and look at the **Pages** report in Search Console for indexing problems.
+- **No sitemap is needed** for a one-page site, because Google finds it from the homepage URL.
+- **Changing the share image later:** WhatsApp and Telegram cache link previews. Add `?v=2` to the `og:image` URL to force a refresh.

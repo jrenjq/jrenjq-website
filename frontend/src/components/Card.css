@@ -1,6 +1,10 @@
 .card {
   max-height: 160px;
   position: relative;
+
+  @media (max-width: 1024px) {
+    max-height: none;    /* let cards grow to fit their text on mobile */
+  }
 }
 
 .card-main-link {

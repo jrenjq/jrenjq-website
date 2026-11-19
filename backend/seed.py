@@ -19,6 +19,14 @@ def upload(filename):
 
 projects = [
     {
+        "title": "jrenjq.com My Website",
+        "tags": ["React", "Flask", "MongoDB", "NGINX"],
+        "subtitle": "Personal hosted website built via 3-tier architecture with reverse proxy and caching.",
+        "icon_file": "minisentry.png",
+        "type": "project",
+        "repo": "https://github.com/jrenjq/TelegramAutoModerator",
+    },
+    {
         "title": "Telegram Moderator Bot",
         "tags": ["Golang", "Claude"],
         "subtitle": "Bot that uses Claude API to evaluate & delete vulgar texts on uni telegram group.",
