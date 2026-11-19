@@ -31,6 +31,7 @@ For details on the frontend or backend code specifically, see the related README
 - [I. Cache via NGINX](#i-cache-via-nginx)
 - [J. Troubleshooting](#j-troubleshooting)
 - [K. Local development (WSL)](#k-local-development-wsl)
+- [L. SEO (Google Search)](#l-seo-google-search)
 
 ---
 
